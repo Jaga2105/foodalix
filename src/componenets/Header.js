@@ -164,7 +164,7 @@ export const Title = () => {
           ))}
           <li className='relative  mr-7'>
           <AiOutlineShoppingCart size={"1.5rem"} className='cursor-pointer text-yellow mt-1'/>
-          <span className='absolute -top-2 -right-2 bg-orange-300 px-[5px] py-[2px] text-center text-xs  rounded-full text-black hover:bg-orange-400'>10</span>
+          <span className='absolute -top-2 -right-2 bg-rose-400 px-[5px] py-[2px] text-center text-xs  rounded-full text-white hover:bg-rose-600'>10</span>
           </li>
           <li className='mr-7'>
               <button
