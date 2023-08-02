@@ -31,11 +31,11 @@ const Body = () => {
       //const res_data = restaurantList;
       console.log(res_data);
       setAllRestaurants(
-        res_data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        res_data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
       setFilteredRestaurants(
-        res_data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        res_data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
     } catch (error) {

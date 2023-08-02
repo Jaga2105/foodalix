@@ -23,16 +23,16 @@ export const SHIMMER_RES_CARDS_COUNT = 8;
 export const SHIMMER_MENU_ITEMS_COUNT = 4;
 
 /* Github - username, blog name */
-export const GITHUB_USER_NAME = "HarshithaSolai";
+export const GITHUB_USER_NAME = "Jaga2105";
 export const GITHUB_BLOG_NAME = "Learn-React-With-Harshi";
 
 /* Github API getuser */
 export const GITHUB_GET_USER = "https://api.github.com/users/";
 
 /* Social Media Links */
-export const GITHUB_LINK = "https://github.com/HarshithaSolai";
-export const LINKEDIN_LINK = "https://www.linkedin.com/in/harshitha-sv/";
-export const GMAIL_LINK = "mailto:solaiharshitha0@gmail.com";
+export const GITHUB_LINK = "https://github.com/Jaga2105";
+export const LINKEDIN_LINK = "https://www.linkedin.com/in/jagannath-nayak-031bbb229/";
+export const GMAIL_LINK = "mailto:jagannathnayak2105@gmail.com";
 
 /* User Address - Checkout  */
 export const USERS_ADDRESS_LIST = [
