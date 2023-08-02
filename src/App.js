@@ -6,6 +6,8 @@ import RestaurantDetails from "./componenets/RestaurantDetails";
 import About from "./componenets/About";
 import Help from "./componenets/Help";
 import Cart from "./componenets/Cart";
+import PaymentPage from "./componenets/PaymentPage";
+import OrderSummary from "./componenets/OrderSummary";
 
 
 
@@ -37,6 +39,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/payment",
+        element: <PaymentPage />,
+      },
+      {
+        path: "/ordersummary",
+        element: <OrderSummary />,
       },
     ],
   },

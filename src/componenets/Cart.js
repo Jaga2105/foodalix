@@ -4,16 +4,17 @@ import { clearCart } from "../utils/cartSlice";
 import ItemQuantity from "./ItemQuantity";
 import CartFallback from "./CartFallback";
 import useItemTotal from "../utils/useItemTotal.js";
-// import { AccountFallback } from "./AccountFallback";
+import { AccountFallback } from "./AccountFallback";
 // import { UserAuth } from "../utils/context/AuthContext";
 import { Link } from "react-router-dom";
 import { isEmptyObject } from "../utils/helper";
 
 const Cart = () => {
 //   const { user } = UserAuth();
+const user=true;
   const cartItems = useSelector((store) => store.cart.items);
-//   const address = useSelector((store) => store.cart.deliveryAddress);
-//   const payment = useSelector((store) => store.cart.paymentMethod);
+  const address = useSelector((store) => store.cart.deliveryAddress);
+  const payment = useSelector((store) => store.cart.paymentMethod);
   const dispatch = useDispatch();
   const getItemTotal = useItemTotal();
 
@@ -23,9 +24,9 @@ const Cart = () => {
 
   return Object.values(cartItems).length > 0 ? (
     <div className="flex mt-5 mx-6 p-20 justify-between sm:p-0 xsm:p-0 mob:p-0 sm:flex-col xsm:flex-col mob:flex-col">
-      {/* <div className="lg:w-[60%] md:w-[60%] xl:w-[60%]">
+      <div className="lg:w-[60%] md:w-[60%] xl:w-[60%]">
         <AccountFallback />
-      </div> */}
+      </div>
 
       <div className="bg-white drop-shadow-md flex-2 p-6 w-auto">
         <div className="flex justify-between items-center mb-2">
@@ -59,7 +60,7 @@ const Cart = () => {
           <p className="font-bold text-sm">To Pay</p>
           <p className="font-bold  text-sm">{"₹ " + getItemTotal()}</p>
         </div>
-        {/* {user && (!isEmptyObject(address) || !isEmptyObject(payment)) && (
+        {user && (!isEmptyObject(address) || !isEmptyObject(payment)) && (
           <>
             <div className="border border-black my-2"></div>
             {!isEmptyObject(address) && (
@@ -97,7 +98,7 @@ const Cart = () => {
               </Link>
             </div>
           </>
-        )} */}
+        )}
       </div>
     </div>
   ) : (
