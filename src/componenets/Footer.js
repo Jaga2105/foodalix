@@ -1,8 +1,8 @@
 
 // import { UserAuth } from '../utils/context/AuthContext';
+import React from "react";
 
-
-export const Footer = () => {
+ const Footer = () => {
 //   const { user } = UserAuth();
 //   let name;
 //   if(user){ 
@@ -20,3 +20,4 @@ export const Footer = () => {
     </div>
   )
 };
+export default Footer

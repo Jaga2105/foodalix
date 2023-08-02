@@ -16,7 +16,7 @@ export const CART_FALLBACK_IMG =
 
 /* BANGALORE LOCATION URL */
 export const GET_RESTAURANTS_LIST = "https://food-alix.onrender.com/api/restaurants?lat=20.2961&lng=85.8245&page_type=DESKTOP_WEB_LISTING";
-export const GET_RESTAURANT_MENU = "https://food-alix.onrender.com/api/menu?lat=12.9351929&lng=77.62448069999999&restaurantId=";
+export const GET_RESTAURANT_MENU = "https://food-alix.onrender.com/api/menu?lat=20.2961&lng=85.8245&restaurantId=";
 
 /* Shimmer - Number of cards & items to be displayed */
 export const SHIMMER_RES_CARDS_COUNT = 8;
