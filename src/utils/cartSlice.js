@@ -15,14 +15,6 @@ const cartSlice = createSlice({
       state.totalItemsCount = state.totalItemsCount + 1;
     },
     updateItem: (state, action) => {
-      //     const item = state.items[action.payload.id];
-      //   //   const quantity =
-      //   //     item && item.hasOwnProperty("quantity")
-      //   //       ? state.items[action.payload.id]?.quantity + 1
-      //   //       : 1;
-      //     state.items[action.payload.id] = { ...action.payload, quantity:1 };
-      //     state.cartItemIds.push(action.payload.id);
-      //   //   state.totalItemsCount = state.totalItemsCount + 1;
       if (Object.keys(state.items).length > Object.keys(action.payload).length){
         state.totalItemsCount = state.totalItemsCount - 1;
       }

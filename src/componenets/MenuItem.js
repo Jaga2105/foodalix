@@ -56,27 +56,10 @@ const MenuItem = ({ item }) => {
             alt={item?.name}
           />
         )}
-        {/* <div className=" flex justify-evenly items-center w-[100px] h-[34px] mt-2.5 text-gray-count outline-none border bg-white border-gray "> */}
-        {/* <button
-            className="text-xl text-gray-count font-semibold"
-            // onClick={() => handleRemoveItem(id)}
-          >
-            {" "}
-            -{" "}
-          </button>
-          <span className="text-base text-green"> {itemCount} </span>
-          <button
-            className="text-green text-xl"
-            // onClick={() => handleAddItem(item)}
-          >
-            {" "}
-            +{" "}
-          </button> */}
         {itemIds.hasOwnProperty(item.id) ? (
           <Link to={"/cart"}>
             <button
               className="bg-green text-gray py-1 px-2 w-[118px] rounded-sm"
-              onClick={() => dispatch(addItem(item))}
             >
               Go to Cart
             </button>
@@ -89,7 +72,6 @@ const MenuItem = ({ item }) => {
             Add to Cart
           </button>
         )}
-        {/* </div> */}
       </div>
     </div>
   );
