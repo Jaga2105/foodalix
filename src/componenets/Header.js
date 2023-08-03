@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/images/FoodAlix.jpeg";
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { checkAuthState, logOut } from "../utils/authSlice";
+import useOnline from "../utils/useOnline";
+
+
 
 const navLinks = [
   {
@@ -21,127 +25,61 @@ const navLinks = [
 
 export const Title = () => {
   return (
-    //   <Link to="/">
-    // {" "}
-    <img className="logo ml-2.5 w-[70px]" alt={"logo"} src={logo} />
-    //   {/* </Link> */}
+      <Link to="/">
+    {" "}
+    <img className="logo ml-2.5 w-[70px] h-12 my-auto" alt={"logo"} src={logo} />
+       </Link>
   );
 };
 export const Intro = () => {
-  // const { user } = UserAuth();
-  // let name;
-  // if (user) {
-  //   if (user.displayName != null) {
-  //     name = user.displayName;
-  //   } else {
-  //     name = user.email;
-  //   }
-  // }
+  const user = useSelector((state) => state.auth.user);
+  let name;
+  if (user) {
+    if (user.displayName != null) {
+      name = user.displayName;
+    } else {
+      name = user.email;
+    }
+  }
 
   return (
     <div className="flex justify-center items-center">
       <span className="py-2.5 px-1 mt-2.5 mr-1 font-bold text-green">
         {" "}
-        {/* {user ? `Hello ${name} ` : "Please Login"} !!! */}
-        Hello Jagannath
+        {user ? `Hello ${name} ` : "Please Login"} !!!
       </span>
     </div>
   );
 };
 
-// export const NavComponent = () => {
-// const { user, logOut } = UserAuth();
-// const navigate = useNavigate();
-// console.log(user);
-// const isOnline = useOnline();
-// const totalItemsCount = useSelector((store) => store.cart.totalItemsCount);
-// console.log("Header:", totalItemsCount);
-// const [menuActive, setMenuActive] = useState(false);
-
-// const closeMenu = () => {
-//   const menu = document.querySelector(".menu-content-container");
-//   menu.classList.remove("active");
-//   menu.classList.add("false");
-// setMenuActive(!menuActive);
-// };/
-
-// const handleSignOut = async () => {
-//   try {
-//     await logOut();
-//     navigate("/");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// const handleSignIn = () => {
-//   navigate("/signin");
-// };
-
-//   return (
-//     <div className="flex items-center justify-between">
-//       <div
-//         className={`menu-content-container flex items-center pr-7  ${
-//           menuActive && "active"
-//         }`}
-//       >
-//         <ul
-//           className={`h-full lg:flex xl:flex md:flex items-center pr-5 ${
-//             !menuActive && "hidden"
-//           }  ${menuActive && "flex flex-col flex-start"}`}
-//         >
-//           {navLinks.map((link, index) => (
-//             <li key={index} className="p-2.5">
-//               {/* <Link to={link.path}> */}
-//                 <button className="nav--btn">{link.title}</button>
-//               {/* </Link> */}
-//             </li>
-//           ))}
-//           <li className="p-2.5">
-//             {/* <Link to="/cart"> */}
-//               {" "}
-//               <button className="nav--btn">
-//                 {" "}
-//                 Cart{" "}
-//                 <span className="text-orange font-bold pl-1">
-//                   {/* {totalItemsCount} */}
-//                   1
-//                 </span>{" "}
-//               </button>{" "}
-//             {/* </Link> */}
-//           </li>
-
-// <li className="p-2.5">
-//   <button
-//     className="nav--btn"
-//     // onClick={() => {
-//     //   user ? handleSignOut() : handleSignIn();
-//     // }}
-//   >
-//     {" "}
-//     {/* {user ? "Logout  " : "Login  "} */}
-//     {/* <span className={isOnline ? "text-green" : "text-red"}>●</span> */}
-//     Login
-//   </button>
-// </li>
-//         </ul>
-//       </div>
-//       <AiOutlineMenu
-//         className="lg:hidden xl:hidden md:hidden flex w-[65px] text-base text-blue-dark cursor-pointer "
-//         onClick={() => {
-//           console.log("icon");
-//           closeMenu();
-//           setMenuActive(!menuActive);
-//         }}
-//       />
-//     </div>
-//   );
-// };
 
 export const NavComponent = () => {
+  const navigate= useNavigate();
+  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+  const isOnline = useOnline();
   const totalCartItems = useSelector((state) => state.cart.totalItemsCount);
+  const user = useSelector((state) => state.auth.user);
+
+  const handleSignOut = async () => {
+  try {
+    await dispatch(logOut());
+    navigate("/");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const handleSignIn = () => {
+  navigate("/signin");
+};
+
+
+  useEffect(() => {
+    dispatch(checkAuthState());
+  }, [dispatch]);
+
   useEffect(() => {
     const handleResize = () => {
       setShowMenu(window.innerWidth <= 767);
@@ -181,14 +119,13 @@ export const NavComponent = () => {
           <li className="mr-7">
             <button
               className="nav--btn"
-              // onClick={() => {
-              //   user ? handleSignOut() : handleSignIn();
-              // }}
+              onClick={() => {
+                user ? handleSignOut() : handleSignIn();
+              }}
             >
-              {/* {" "} */}
-              {/* {user ? "Logout  " : "Login  "} */}
-              {/* <span className={isOnline ? "text-green" : "text-red"}>●</span> */}
-              Login
+               {" "} 
+               {user ? "Logout  " : "Login  "} 
+               <span className={isOnline ? "text-green" : "text-red"}>●</span> 
             </button>
           </li>
         </ul>
@@ -200,7 +137,7 @@ export const NavComponent = () => {
         />
       )}
       {showSidebar && (
-        <ul className="left-0 w-[300px] h-[calc(100%-65px)] bg-white fixed top-[70px] flex-col justify-between py-0 pl-[30px] mt-6">
+        <ul className="left-0 w-[300px] h-[calc(100%-65px)] bg-white fixed top-[70px] flex-col justify-between py-0 pl-[30px]">
           {navLinks.map((link) => (
             <li key={link.title} className="text-black pr-7 mb-6">
               <Link to={link.path}>
@@ -222,13 +159,13 @@ export const NavComponent = () => {
           <li className="mr-7">
             <button
               className="nav--btn"
-              // onClick={() => {
-              //   user ? handleSignOut() : handleSignIn();
-              // }}
+              onClick={() => {
+                user ? handleSignOut() : handleSignIn();
+              }}
             >
-              {/* {" "} */}
-              {/* {user ? "Logout  " : "Login  "} */}
-              {/* <span className={isOnline ? "text-green" : "text-red"}>●</span> */}
+               {" "} 
+               {user ? "Logout  " : "Login  "} 
+               <span className={isOnline ? "text-green" : "text-red"}>●</span> 
               Login
             </button>
           </li>
@@ -238,14 +175,12 @@ export const NavComponent = () => {
   );
 };
 const Header = () => {
-  // const [showMenu, setShowMenu] = useState(false);
-  // const [showSidebar, setShowSidebar] = useState(false);
+  
   return (
     <div className="flex justify-between bg-white shadow fixed top-0 left-0 w-full h-[70px] z-50">
       <Title />
       <Intro />
       <NavComponent
-      // showMenu={showMenu} setShowMenu={setShowMenu} showSidebar={showSidebar} setShowSidebar={setShowSidebar}
       />
     </div>
   );

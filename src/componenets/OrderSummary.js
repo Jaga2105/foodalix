@@ -1,15 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useItemTotal from "../utils/useItemTotal";
+import { clearCart } from "../utils/cartSlice";
+import { Navigate } from "react-router-dom";
 
 const OrderSummary = () => {
+  const dispatch = useDispatch();
   const cart = useSelector((store) => store.cart);
-  const cartItems = cart.items;
+  const orders = cart.orderItems;
   const address = cart.deliveryAddress;
   const payment = cart.paymentMethod;
   const getItemTotal = useItemTotal();
+
+  useEffect(()=>{
+    dispatch(clearCart());
+  },[])
   return (
     <div className="flex container mx-auto items-center justify-center">
+      {/* {!cartItems && <Navigate to={'/'} replace={true}></Navigate>} */}
       <div className="flex flex-col bg-white drop-shadow-md flex-2 p-6 w-[500px] items-center">
         <div className="flex justify-center items-center mb-2">
           <h1 className="text-lg mt-2.5 text-title font-bold ">
@@ -17,7 +25,7 @@ const OrderSummary = () => {
           </h1>
         </div>
         <div className="flex flex-col w-[400px] justify-center border border-solid border-gray p-10">
-          {Object.values(cartItems).map((item) => {
+          {Object.values(orders).map((item) => {
             return (
               <div className="my-3">
                 <div className="flex items-center mt-2 justify-center">

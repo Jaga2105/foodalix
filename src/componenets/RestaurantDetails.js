@@ -17,7 +17,6 @@ const RestaurantDetails = () => {
   ) : (
     <div className="container">
       <RestaurantInfo {...restaurant.info} />
-      {console.log(restaurant.menu)}
       <RestaurantMenuList menu={restaurant.menu} /> 
     </div>
   );

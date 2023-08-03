@@ -2,27 +2,27 @@ import {RES_IMG_CDN } from "../config";
 import { AiFillStar } from "react-icons/ai";
 import { useState } from "react";
 
-export const RestaurantCard = ({ props}) => {
-  const {name, cuisines, cloudinaryImageId, avgRating, sla, costForTwo} = props;
+export const RestaurantCard = ({ props, setRestaurants}) => {
+  const {name, cuisines, cloudinaryImageId, avgRating, sla, costForTwo} = props.info;
   const buttonStyle = {
     backgroundColor: avgRating == "--" ? "#fff" : parseFloat(avgRating) < 4.0 ? "#db7c38":"#48c479",
     color : isNaN(avgRating)? "#535665" : "#fff"
   }
-//   const [isFavourite, setIsFavourite] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(false);
 
-//   const markFavourite = (event) => {
-//     setRestaurants(props);
-//     setIsFavourite(!isFavourite);
-//     event.preventDefault();
-//   }
+  const markFavourite = (event) => {
+    setRestaurants(props);
+    setIsFavourite(!isFavourite);
+    event.preventDefault();
+  }
 
   return (
     <div className="basis-[250px] mob:basis-[150px] p-2.5 mb-2.5 hover:shadow">
-      <div className="relative w-full ">
-        {/* <div className="absolute z-[2] text-gray-light text-[25px] text-right cursor-pointer rounded-[10rem] w-[99%] ">
+      <div className="relative w-full group">
+        <div className="hidden absolute z-[2] text-gray-light text-[25px] text-right cursor-pointer rounded-[10rem] w-[99%] group-hover:block">
           <span className={isFavourite? "text-red" : ""} 
           onClick={(e) => {markFavourite(e)}} >&#x2764;</span>
-        </div> */}
+        </div>
         <img className="w-full mob:w-[130px]" src={ RES_IMG_CDN  + cloudinaryImageId } alt={name}/>      
       </div>
       <div className="">

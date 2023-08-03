@@ -39,13 +39,13 @@ export const USERS_ADDRESS_LIST = [
 	{
 		id: "01",
 		addressType: "Home",
-		addressDescription: "12, D block , Indira nagar",
+		addressDescription: "12, D block , Saraswati Vihar, Bhubaneswar",
 	},
 
 	{
 		id: "02",
-		addressType: "Work",
-		addressDescription: "RMZ, Koramangala",
+		addressType: "Home",
+		addressDescription: "Subalaya, Ganjam, Odisha",
 	},
 ];
 
@@ -53,13 +53,13 @@ export const USERS_ADDRESS_LIST = [
 export const PAYMENT_METHODS = [
 	{
 		id: "01",
-		paymentType: "Pay Online",
+		paymentType: "Pre-Paid",
 		paymentMethod: ["UPI / Card Payment"],
 	},
 
 	{
 		id: "02",
-		paymentType: "Pay Offline",
+		paymentType: "Post-Paid",
 		paymentMethod: ["Cash On Delivery"],
 	},
 ];
@@ -80,7 +80,7 @@ export const FAQ = [
   },
   {
     id: 475,
-    title: "Will Insta Food be accountable for quality/quantity? ",
+    title: "Will Food Alix be accountable for quality/quantity? ",
     description:
       "Quantity and quality of the food is the restaurants' responsibility. However in case of issues with the quality or quantity, kindly submit your feedback and we will pass it on to the restaurant.",
   },

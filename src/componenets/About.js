@@ -23,12 +23,8 @@ class About extends Component {
       <div className="container flex justify-around mob:flex-col">
         <div className="card-container w-[70%] h-2/4 mob:w-auto">
           <h1 className="card-container-title">About Me</h1>
-          <ProfileClass name={GITHUB_USER_NAME}/>  { /* Passing props from parent to child */ }
+          <ProfileClass name={GITHUB_USER_NAME}/>  
         </div>
-        {/* <div className="card-container w-[70%] mob:w-auto"> */}
-          {/* <h1 className="card-container-title">About this project</h1> */}
-          {/* <BlogClass name={GITHUB_BLOG_NAME}/> { /* Passing props from parent to child */ } 
-        {/* </div>   */}
       </div>
     )
   }

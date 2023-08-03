@@ -8,7 +8,9 @@ import Help from "./componenets/Help";
 import Cart from "./componenets/Cart";
 import PaymentPage from "./componenets/PaymentPage";
 import OrderSummary from "./componenets/OrderSummary";
-
+import Error from "./componenets/Error";
+import SignIn from "./componenets/SignIn";
+import SignUp from "./componenets/SignUp";
 
 
 function App() {
@@ -47,6 +49,16 @@ const appRouter = createBrowserRouter([
       {
         path: "/ordersummary",
         element: <OrderSummary />,
+      },
+      {
+        path: "/signin",
+        element: <SignIn />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+        errorElement: <Error />,
       },
     ],
   },

@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { updatePaymentMethod } from "../utils/cartSlice";
 
 const PaymentDetails = (payment) => {
-  console.log(payment);
   const dispatch = useDispatch();
   const handlePayment = (payment) => {
     dispatch(updatePaymentMethod(payment));

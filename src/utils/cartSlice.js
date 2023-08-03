@@ -4,6 +4,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     items: {},
+    orderItems:{},
     totalItemsCount: 0,
     deliveryAddress: {},
     paymentMethod: {},
@@ -35,6 +36,12 @@ const cartSlice = createSlice({
       state.items = {};
       state.totalItemsCount = 0;
     },
+    updateOrderItems: (state)=>{
+      state.orderItems=state.items;
+    },
+    clearOrderItems: (state)=>{
+      state.orderItems={};
+    },
     updateDeliveryAddress: (state, action) => {
       state.deliveryAddress = action.payload;
     },
@@ -48,6 +55,8 @@ export const {
   addItem,
   removeItem,
   updateItem,
+  updateOrderItems,
+  clearOrderItems,
   clearCart,
   updateDeliveryAddress,
   updatePaymentMethod,

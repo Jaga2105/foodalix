@@ -1,26 +1,30 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../utils/cartSlice";
+import { clearCart, updateOrderItems } from "../utils/cartSlice";
 import ItemQuantity from "./ItemQuantity";
 import CartFallback from "./CartFallback";
 import useItemTotal from "../utils/useItemTotal.js";
 import { AccountFallback } from "./AccountFallback";
-// import { UserAuth } from "../utils/context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { isEmptyObject } from "../utils/helper";
 
 const Cart = () => {
-//   const { user } = UserAuth();
-const user=true;
+
+  const user = useSelector((state) => state.auth.user);
   const cartItems = useSelector((store) => store.cart.items);
   const address = useSelector((store) => store.cart.deliveryAddress);
   const payment = useSelector((store) => store.cart.paymentMethod);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const getItemTotal = useItemTotal();
 
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+  const handleOrder = () =>{
+    dispatch(updateOrderItems());
+    navigate('/payment');
+  }
 
   return Object.values(cartItems).length > 0 ? (
     <div className="flex mt-5 mx-6 p-20 justify-between sm:p-0 xsm:p-0 mob:p-0 sm:flex-col xsm:flex-col mob:flex-col">
@@ -90,12 +94,13 @@ const user=true;
               </div>
             )}
             <div className="flex justify-center my-10">
-              <Link to="/payment">
-                <button className="bg-yellow px-4 py-2 text-blue-dark hover:drop-shadow-lg backdrop-blur">
+              {/* <Link to="/payment"> */}
+                <button className="bg-yellow px-4 py-2 text-blue-dark hover:drop-shadow-lg backdrop-blur"
+                onClick={()=>handleOrder()}>
                   {" "}
                   PROCEED TO PAYMENT
                 </button>
-              </Link>
+              {/* </Link> */}
             </div>
           </>
         )}

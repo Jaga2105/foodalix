@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { clearCart } from "../utils/cartSlice";
 
 const PaymentPage = () => {
+    const dispatch = useDispatch();
   const payment = useSelector((store) => store.cart.paymentMethod);
   const navigate = useNavigate();
   useEffect(() => {
     //Mock payment page  - Succesful payment
     if (true) {
+        dispatch(clearCart);
       navigate("/ordersummary");
     }
   }, []);

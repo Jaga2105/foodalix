@@ -1,12 +1,12 @@
-// import { UserAuth } from "../utils/context/AuthContext";
+
 import { Link } from "react-router-dom";
 import AddressCard from "./AddressCard";
 import { PAYMENT_METHODS, USERS_ADDRESS_LIST } from "../config";
 import PaymentDetails from "./PaymentDetails";
+import { useSelector } from "react-redux";
 
 export const AccountFallback = () => {
-//   const { user } = UserAuth();
-const user=1;
+  const user = useSelector((state) => state.auth.user);
 
   return (
     <div className="bg-white drop-shadow-md p-6">
@@ -35,7 +35,7 @@ const user=1;
             </div>
             <div className="flex flex-col justify-center items-center gap-5">
               <h1 className="text-base mt-2.5 text-bio font-bold ">
-                New to Instafood ?{" "}
+                New to FoodAlix ?{" "}
               </h1>
               <Link to="/signup">
                 <button className="w-[100px] h-[50px] bg-yellow rounded text-sm text-blue-dark">
