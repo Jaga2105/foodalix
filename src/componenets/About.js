@@ -5,19 +5,17 @@ import { GITHUB_USER_NAME, GITHUB_BLOG_NAME } from "../config";
 class About extends Component {
   constructor(props) {
     super(props);
-    console.log("About(parent) - constructor");
   }
 
   componentDidUpdate() {
-    console.log("About Component - componentDidUpdate")
   }
 
   componentWillUnmount() {
-    console.log("About Component - componentWillUnmount")
+  
   }
 
   render() {
-    console.log("About(parent) - render");
+    
 
     return (
       <div className="container flex justify-around mob:flex-col">

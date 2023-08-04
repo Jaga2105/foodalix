@@ -27,7 +27,6 @@ const Body = () => {
   useEffect(()=>{
     dispatch(clearOrderItems());
   },[dispatch])
-  console.log(orders)
 
   const getRestaurants = async () => {
     try {
@@ -37,7 +36,6 @@ const Body = () => {
 
       /* Mock Data */
       //const res_data = restaurantList;
-      console.log(res_data);
       setAllRestaurants(
         res_data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
@@ -47,9 +45,8 @@ const Body = () => {
           ?.restaurants
       );
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-    console.log(allRestaurants)
   };
 
   const searchData = (searchText, restaurants) => () => {
@@ -83,19 +80,21 @@ const Body = () => {
   } else { //If restaurant is already in local storage, then remove from it.
       const modifiedFavRestaurants = favRestaurants.filter((restaurant) => restaurant.info.id !== props.info.id);
       setFavRestaurants(modifiedFavRestaurants);
+      if(isFavourite)
+      showFavouriteRestaurants(modifiedFavRestaurants)
   }
   }
 
-  const showFavouriteRestaurants = () => {
+  const showFavouriteRestaurants = (favouriteRestaurants) => {
     if(isFavourite) {
       if(errorMsg) setErrorMsg('');
       setFilteredRestaurants(allRestaurants);
     } else {
-      if(favRestaurants.length === 0) {
+      if(favouriteRestaurants.length === 0) {
         setErrorMsg('No favourites');
         setFilteredRestaurants([]);
       } else {
-        setFilteredRestaurants(favRestaurants);
+        setFilteredRestaurants(favouriteRestaurants);
       }
     }
     setIsFavourite(!isFavourite);
@@ -119,12 +118,12 @@ const Body = () => {
         </div>
         <div className="flex justify-end h-[100px] items-center m-auto mob:h-[50px]">
             <button className={isFavourite? "btn btn--primary px-[5px] mob:basis-[50px] mob:text-xs": "btn btn--secondary px-[5px] mob:basis-[50px] mob:text-xs" } 
-            onClick={()=> {showFavouriteRestaurants()}}>Favourites </button>
+            onClick={()=> {showFavouriteRestaurants(favRestaurants)}}>Favourites </button>
         </div>
       </div>
       {errorMsg && (
-        <div className="h-14 m-auto text-center" id="error">
-          <span className="error-text w-14 h-8 " id="error-msg">
+        <div className="h-14 m-auto text-center " id="error">
+          <span className="error-text w-14 h-8" id="error-msg">
             {errorMsg}
           </span>
         </div>
@@ -135,7 +134,6 @@ const Body = () => {
       ) : (
         <div
           className="flex flex-wrap gap-5 justify-center xl:max-w-7xl xl:mx-auto"
-          // className="mx-auto max-w-2xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 justify-center items-center "
         >
           {filteredRestaurants.map((restaurant) => {
             return (

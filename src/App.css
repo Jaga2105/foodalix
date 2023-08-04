@@ -52,6 +52,6 @@
 }
 
 .error-text {
-  @apply text-red text-xs;
+  @apply text-red text-lg;
 }
 

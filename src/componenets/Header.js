@@ -151,9 +151,10 @@ const handleSignIn = () => {
                 size={"1.5rem"}
                 className="cursor-pointer text-yellow mt-1"
               />
+              {totalCartItems > 0 && (
               <span className="absolute -top-2 left-8 bg-orange-300 px-[5px] py-[2px] text-center text-xs  rounded-full text-black hover:bg-orange-400">
                 {totalCartItems}
-              </span>
+              </span>)}
             </Link>
           </li>
           <li className="mr-7">
@@ -166,7 +167,6 @@ const handleSignIn = () => {
                {" "} 
                {user ? "Logout  " : "Login  "} 
                <span className={isOnline ? "text-green" : "text-red"}>●</span> 
-              Login
             </button>
           </li>
         </ul>
