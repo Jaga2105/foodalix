@@ -1,8 +1,7 @@
 // src/features/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
-    signInWithRedirect,
-  // signInWithPopup,
+  signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -46,7 +45,7 @@ export const googleSignIn = createAsyncThunk("auth/googleSignIn", async () => {
   //   prompt: "select_account",
   //   opener: null, // Set opener to null to avoid COOP error
   // });
-  await signInWithRedirect(auth, provider);
+  await signInWithPopup(auth, provider);
 });
 
 export const logOut = createAsyncThunk("auth/logOut", async () => {
