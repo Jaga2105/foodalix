@@ -75,11 +75,6 @@ const handleSignIn = () => {
   navigate("/signin");
 };
 
-
-  useEffect(() => {
-    dispatch(checkAuthState());
-  }, [dispatch]);
-
   useEffect(() => {
     const handleResize = () => {
       setShowMenu(window.innerWidth <= 767);
@@ -175,6 +170,11 @@ const handleSignIn = () => {
   );
 };
 const Header = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(checkAuthState());
+  }, [dispatch]);
+
   
   return (
     <div className="flex justify-between bg-white shadow fixed top-0 left-0 w-full h-[70px] z-50">

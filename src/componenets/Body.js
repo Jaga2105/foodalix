@@ -20,7 +20,8 @@ const Body = () => {
   const isOnline = useOnline(); /* Custom Hook */
   const [isFavourite, setIsFavourite] = useState(false);
   const [favRestaurants, setFavRestaurants] = useLocalStorage("fav"); /* Custom Hook */
-  const orders = useSelector(state=>state.cart.orderItems)
+  const user = useSelector(state=>state.auth.user);
+  console.log(user);
   useEffect(() => {
     getRestaurants();
   }, []);

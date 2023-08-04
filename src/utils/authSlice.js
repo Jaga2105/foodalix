@@ -1,7 +1,8 @@
 // src/features/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
-    signInWithPopup,
+    // signInWithRedirect,
+  signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -41,10 +42,10 @@ export const signIn = createAsyncThunk(
 
 export const googleSignIn = createAsyncThunk("auth/googleSignIn", async () => {
   const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({
-    prompt: "select_account",
-    opener: null, // Set opener to null to avoid COOP error
-  });
+  // provider.setCustomParameters({
+  //   prompt: "select_account",
+  //   opener: null, // Set opener to null to avoid COOP error
+  // });
   await signInWithPopup(auth, provider);
 });
 
@@ -68,9 +69,12 @@ const authSlice = createSlice({
       .addCase(signUp.fulfilled, (state) => {
         state.loading = false;
       })
+      .addCase(signIn.rejected, (state) => {
+        state.loading = true;
+      })
       .addCase(signIn.fulfilled, (state) => {
         state.loading = false;
-        console.log("test")
+        console.log(state.user)
       })
       .addCase(googleSignIn.fulfilled, (state) => {
         state.loading = false;

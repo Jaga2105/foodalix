@@ -1,67 +1,30 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./App.css";
-import AppLayout from "./componenets/AppLayout";
-import Body from "./componenets/Body";
-import RestaurantDetails from "./componenets/RestaurantDetails";
-import About from "./componenets/About";
-import Help from "./componenets/Help";
-import Cart from "./componenets/Cart";
-import PaymentPage from "./componenets/PaymentPage";
-import OrderSummary from "./componenets/OrderSummary";
-import Error from "./componenets/Error";
-import SignIn from "./componenets/SignIn";
-import SignUp from "./componenets/SignUp";
+import React, { useEffect } from 'react'
+import Header from './componenets/Header'
+import Footer from './componenets/Footer'
+import "./App.css"
+import { Outlet } from 'react-router-dom'
+
+// Redux
+import { Provider, useDispatch } from "react-redux"
+import store from "./utils/store";
+// react toastify
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 
-function App() {
-  return <RouterProvider router={appRouter} />;
+const AppLayout = () => {
+  
+
+  return (
+    <div >
+      <Provider store={store}>
+      <ToastContainer />
+      <Header/>
+      <Outlet/>
+      <Footer/>
+      </Provider>
+    </div>
+  )
 }
 
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <AppLayout />,
-    children: [
-      {
-        path: "/",
-        element: <Body />,
-      },
-      {
-        path: "/restaurant/:resId",
-        element: <RestaurantDetails />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/help",
-        element: <Help />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
-      {
-        path: "/payment",
-        element: <PaymentPage />,
-      },
-      {
-        path: "/ordersummary",
-        element: <OrderSummary />,
-      },
-      {
-        path: "/signin",
-        element: <SignIn />,
-        errorElement: <Error />,
-      },
-      {
-        path: "/signup",
-        element: <SignUp />,
-        errorElement: <Error />,
-      },
-    ],
-  },
-]);
-
-export default App;
+export default AppLayout

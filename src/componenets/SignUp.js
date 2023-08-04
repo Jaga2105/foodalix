@@ -8,21 +8,47 @@ import { toast } from "react-toastify";
 const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const validateEmail = () => {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        setEmailError('Please enter a valid email address');
+        return false;
+      }
+      setEmailError('');
+      return true;
+    };
+  
+    const validatePassword = () => {
+      
+      const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+      if (!passwordPattern.test(password)) {
+        setPasswordError(`Password must be at least 6 characters 
+        and contain one uppercase letter, 
+        one lowercase letter, and one number.`);
+        return false;
+      }
+      setPasswordError('');
+      return true;
+    };
   
     const handleSignUpSubmit = async (e) => {
       e.preventDefault();
+      const isEmailValid = validateEmail();
+    const isPasswordValid = validatePassword();
       if(email==="" || password===""){
         toast.error("Enter all credentials")
-      }else{
-      setError("");
+      }else if(isEmailValid && isPasswordValid){
       try {
         await dispatch(signUp({ email, password }));
-        navigate("/");
+        navigate("/signin");
+        toast.success("successfully registered");
       } catch (e) {
-        setError(e.message);
+        // setError(e.message);
         console.log(e.message);
       }
     }
@@ -46,6 +72,7 @@ const SignUp = () => {
                     placeholder="Email address"
                     onChange={(e) => setEmail(e.target.value)}
                   />
+                  {emailError && <span className="text-red">{emailError}</span>}
                 </div>
 
                 <div className="mb-6">
@@ -55,9 +82,11 @@ const SignUp = () => {
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  
                 </div>
-                <div className="mb-6">
-                  <span className="error-text">{error && error} </span>
+                <div className="mb-6 w-[400px]">
+                  {/* <span className="error-text">{error && error} </span> */}
+                  {passwordError && <span className="text-red  break-words">{passwordError}</span>}
                 </div>
 
                 <button

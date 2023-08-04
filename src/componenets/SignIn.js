@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn, googleSignIn } from "../utils/authSlice";
+import { signIn, googleSignIn, checkAuthState } from "../utils/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import {GoogleButton} from "react-google-button";
 import logo from "../assets/images/FoodAlix.jpeg";
@@ -12,7 +12,8 @@ const SignIn = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
+    const authenticated = useSelector((state) => state.auth.user);
+    const load = useSelector((state) => state.auth.loading);
     const navigate = useNavigate();
   
     const handleSubmit = async (e) => {
@@ -23,7 +24,8 @@ const SignIn = () => {
       setError("");
       try {
         await dispatch(signIn({ email, password }));
-        navigate("/");
+        dispatch(checkAuthState())
+        
       } catch (e) {
         setError(e.message);
         console.log(e.message);
@@ -34,17 +36,20 @@ const SignIn = () => {
     const handleGoogleSignIn = async () => {
       try {
         await dispatch(googleSignIn());
+        dispatch(checkAuthState())
+        // if(authenticated)
+        navigate("/");
       } catch (error) {
         console.log(error);
       }
     };
   
     useEffect(() => {
-        console.log("user in signin", user);
-        if (user != null) {
-          navigate("/");
-        }
-      }, [user]);
+        console.log("user in signin", authenticated);
+        // navigate("/");
+         if (authenticated) {
+          navigate("/");}
+      }, [authenticated,navigate,load]);
     
       return (
         <div>
