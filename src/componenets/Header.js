@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuthState, logOut } from "../utils/authSlice";
 import useOnline from "../utils/useOnline";
+import { clearCart } from "../utils/cartSlice";
 
 
 
@@ -65,6 +66,7 @@ export const NavComponent = () => {
   const handleSignOut = async () => {
   try {
     await dispatch(logOut());
+    dispatch(clearCart())
     navigate("/");
   } catch (error) {
     console.log(error);
